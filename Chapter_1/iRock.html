@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>iRock - The Virtual Pet Rock</title>
+	<meta charset="utf-8">
+
+	<style type="text/css">
+		
+	</style>
+	<script type="text/javascript">
+		function touchRock () {
+			var userName = prompt ("What is your name?" , "Enter your name here.");
+			if (userName) {
+				alert ("It is good to meet you ," + userName + ".");
+				document.getElementById("rockimg").src="http://pic.pimg.tw/chinpin/492979a4931c2.jpg";
+			} 
+		}
+	</script>
+</head>
+
+<body onload="alert('Hi,I am your pet rock.');">
+	<div style="margin-top: 50px; text-align: center;">
+	<img id="rockimg" src="http://www.tps-audio.com/images/CL-25-2.jpg" alt="iRock" style="cursor: pointer;" onclick="touchRock();" />
+
+	</div>
+</body>
+</html>
