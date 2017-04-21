@@ -3,7 +3,7 @@
     <title>iRock - The Virtual Pet Rock</title>
 
     <script type="text/javascript" src="cookie.js"></script>
-    
+
     <script type="text/javascript">
       var userName;
 
@@ -12,7 +12,12 @@
       }
 
       function greetUser() {
-        alert('Hello, I am your pet rock.');
+        if (navigator.cookieEnabled)
+  		    userName = readCookie("irock_username");
+        if (userName)
+          alert("Hello " + userName + ", I missed you.");
+        else
+          alert('Hello, I am your pet rock.');
       }
 
       function touchRock() {
@@ -21,9 +26,14 @@
         }
         else {
           userName = prompt("What is your name?", "Enter your name here.");
-          if (userName)
+          if (userName) {
             alert("It is good to meet you, " + userName + ".");
-        }
+          if (navigator.cookieEnabled)
+        	   writecookie("iRock_username", userName , 5 * 365 );
+          else 
+            alert ("I'm sorry. Cookie aren't supporeted / enable in your browser. I won't remember you later.");
+          }
+    }
         document.getElementById("rockImg").src = "rock_happy.png";
         setTimeout("document.getElementById('rockImg').src = 'rock.png';", 30 * 1000);
       }
