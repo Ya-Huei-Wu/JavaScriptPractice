@@ -1,27 +1,49 @@
-<!DOCTYPE html>
 <html>
-<head>
-	<title>iRock - The Virtual Pet Rock</title>
-	<meta charset="utf-8">
+  <head>
+    <title>iRock - The Virtual Pet Rock</title>
 
-	<style type="text/css">
-		
-	</style>
-	<script type="text/javascript">
-		function touchRock () {
-			var userName = prompt ("What is your name?" , "Enter your name here.");
-			if (userName) {
-				alert ("It is good to meet you ," + userName + ".");
-				document.getElementById("rockimg").src="http://pic.pimg.tw/chinpin/492979a4931c2.jpg";
-			} 
-		}
-	</script>
-</head>
+    <script type="text/javascript" src="cookie.js"></script>
 
-<body onload="alert('Hi,I am your pet rock.');">
-	<div style="margin-top: 50px; text-align: center;">
-	<img id="rockimg" src="http://www.tps-audio.com/images/CL-25-2.jpg" alt="iRock" style="cursor: pointer;" onclick="touchRock();" />
+    <script type="text/javascript">
+      var userName;
 
-	</div>
-</body>
+      function resizeRock() {
+        document.getElementById("rockImg").style.height = (document.body.clientHeight - 100) * 0.9;
+      }
+
+      function greetUser() {
+        if (navigator.cookieEnabled)
+  		    userName = readCookie("iRock_username");
+        if (userName)
+          alert("Hello " + userName + ", I missed you.");
+        else
+          alert('Hello, I am your pet rock.');
+      }
+
+      function touchRock() {
+        if (userName) {
+          alert("I like the attention, " + userName + ". Thank you.");
+        }
+        else {
+          userName = prompt("What is your name?", "Enter your name here.");
+          if (userName) {
+            alert("It is good to meet you, " + userName + ".");
+            if (navigator.cookieEnabled) {
+          	   writeCookie("iRock_username", userName , 5 * 365 );
+            } else {
+              alert ("I'm sorry. Cookie aren't supporeted / enable in your browser. I won't remember you later.");
+            }
+          }
+    }
+        document.getElementById("rockImg").src = "rock_happy.png";
+        setTimeout("document.getElementById('rockImg').src = 'rock.png';", 30 * 1000);
+      }
+    </script>
+  </head>
+
+  <body onload="resizeRock(); greetUser();" onresize="resizeRock();">
+    <div style="margin-top:100px; text-align:center">
+      <img id="rockImg" src="rock.png" alt="iRock" style="cursor:pointer" onclick="touchRock();" />
+    </div>
+  </body>
 </html>
